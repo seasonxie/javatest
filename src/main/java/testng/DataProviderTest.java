@@ -20,8 +20,8 @@ public class DataProviderTest {
         System.out.println(context.getName());
         return new Object[][] {
                 {"lilei11", 20, "football"},
-                {"hanmeimei", 18, "music"},
-                {"wangnima", 25, "baozoumanhua"}
+                {"hanmeimei1", 18, "music"},
+                {"wangnima1", 25, "baozoumanhua"}
         };
     }
 
