@@ -19,7 +19,7 @@ public class DataProviderTest {
     public Object[][] data1(ITestContext context) {
         System.out.println(context.getName());
         return new Object[][] {
-                {"lilei", 20, "football"},
+                {"lilei11", 20, "football"},
                 {"hanmeimei", 18, "music"},
                 {"wangnima", 25, "baozoumanhua"}
         };
