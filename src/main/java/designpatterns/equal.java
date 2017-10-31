@@ -8,18 +8,15 @@ package designpatterns;
 public class equal {
 
     public static void main(String[] args) {
-        System.out.println("111".equals("111"));
-        Object ss="111";
-        System.out.println("111".equals(ss));
-        Object ss1="sss";
-        System.out.println("ss".getClass()==ss);
-        System.out.println(ss1==ss);
 
-   /*     if(this == obj)
-                    return true;
-           if((obj == null) || (obj.getClass() != this.getClass()))
-                       return false;
-               // object must be Test at this point
-              Test test = (Test)obj;*/
+    }
+
+
+    public void Arraylist() {
+         /*  public E remove(int index);
+
+    public boolean remove(Object o);
+
+    当我们传入int类型的时候，会自动被当成上面那个方法来调用。而下面那个移除某个特定元素的方法是需要传入一个Object对象*/
     }
 }
