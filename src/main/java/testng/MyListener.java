@@ -7,6 +7,7 @@ public class MyListener  implements IInvokedMethodListener, ITestListener {
 
     private boolean testSuccess = true;
 
+    @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
         System.out.println("beforeInvocation");
         if(method.isTestMethod() && annotationPresent(method, Description.class) ) {
@@ -20,6 +21,7 @@ public class MyListener  implements IInvokedMethodListener, ITestListener {
         return method.getTestMethod().getConstructorOrMethod().getMethod().isAnnotationPresent(clazz) ? true : false;
     }
 
+    @Override
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
         System.out.println("afterInvocation");
         if(method.isTestMethod()) {
@@ -34,27 +36,27 @@ public class MyListener  implements IInvokedMethodListener, ITestListener {
     }
 
 
-
+    @Override
     public void onTestStart(ITestResult iTestResult) {
 
     }
-
+    @Override
     public void onTestSuccess(ITestResult iTestResult) {
 
     }
-
+    @Override
     public void onTestFailure(ITestResult iTestResult) {
 
     }
-
+    @Override
     public void onTestSkipped(ITestResult iTestResult) {
 
     }
-
+    @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
 
     }
-
+    @Override
     public void onStart(ITestContext context) {
         System.out.println("onStart");
         for(ITestNGMethod m1 : context.getAllTestMethods()) {
@@ -63,7 +65,7 @@ public class MyListener  implements IInvokedMethodListener, ITestListener {
             }
         }
     }
-
+    @Override
     public void onFinish(ITestContext iTestContext) {
 
     }
