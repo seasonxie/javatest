@@ -18,7 +18,9 @@ public class equal {
 
      class A  {
         // static{} > { }  >  构造器
-        private String a="a";
+
+
+        private String a="a";  //堆，如果"a"再string池中不存在，就会新建一个new string（"a"）对象
         //存对象，堆区被所有线程共享，存放对象本身
          public void test1() {
              String b="b";
@@ -38,7 +40,8 @@ public class equal {
         j=j++ + ++j;
         System.out.println(j);//2
 
-        //& 无论前面true 或者 false都会执行后面
+        //&（两边boolean类型） 无论前面true 或者 false都会执行后面
+        //&（两边int类型） 把两边转为2进制后再针对每个位置（个十百千）运算
         //&& 和上面相fang
     }
 
@@ -67,4 +70,13 @@ public class equal {
     public boolean remove(Object o);
     当我们传入int类型的时候，会自动被当成上面那个方法来调用。而下面那个移除某个特定元素的方法是需要传入一个Object对象*/
     }
+
+    public void Reference(){
+        //StrongReference  宁愿outofmemery也不回收
+        //SoftReference 内存不足回收
+        //WeakReference 扫描到就回收
+        //PhantomReference 任何时候都可能被
+    }
+
+
 }
