@@ -11,6 +11,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 
+@Listeners(MyListener.class)
 public class Tests {
 
     @Test(invocationCount = 2)

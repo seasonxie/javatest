@@ -1,5 +1,6 @@
 package testng;
 
+import annnotation.DataPrepare;
 import annnotation.Description;
 import org.testng.*;
 
@@ -10,14 +11,14 @@ public class MyListener  implements IInvokedMethodListener, ITestListener {
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
         System.out.println("beforeInvocation");
-        if(method.isTestMethod() && annotationPresent(method, Description.class) ) {
-            System.out.println("beforeAnnotation...");
+        if(method.isTestMethod() && annotationPresent(method, DataPrepare.class) ) {
+            System.out.println("beforeAnnotation11111...");
             System.out.println(testResult.toString());
         }
 
     }
 
-    private boolean annotationPresent(IInvokedMethod method, Class<Description> clazz) {
+    private boolean annotationPresent(IInvokedMethod method, Class clazz) {
         return method.getTestMethod().getConstructorOrMethod().getMethod().isAnnotationPresent(clazz) ? true : false;
     }
 
@@ -38,7 +39,7 @@ public class MyListener  implements IInvokedMethodListener, ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-
+        System.out.println("onTestStart");
     }
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
