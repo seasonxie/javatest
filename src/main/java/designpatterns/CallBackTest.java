@@ -1,7 +1,8 @@
 package designpatterns;
 
 /**
- * Created by zhaotang on 2017/10/18.
+ * Created by zhaotang on 2017/10/18
+ * 新建接口和定义方法，在主运行中需要引用实现这个接口的类并回调其中方法
  */
 public class CallBackTest {
     public  void main(String[] args) {

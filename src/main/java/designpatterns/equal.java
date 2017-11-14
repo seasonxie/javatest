@@ -7,7 +7,7 @@ package designpatterns;
 public class equal {
 
     public static void main(String[] args) {
-
+       "ss".equals("");
 
     }
 

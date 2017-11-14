@@ -1,6 +1,8 @@
 package designpatterns;
 
 import org.assertj.core.api.SoftAssertions;
+import org.omg.CORBA.Object;
+import org.testng.Assert;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -9,12 +11,13 @@ public class AssertJJ {
     public static void main(String[] args) {
         assertThat("abc").as("校验abc")
                 .startsWith("ab")
-                .endsWith("do")
-                .isEqualToIgnoringCase("frodo")
-                .hasSize(9);
+                .endsWith("c");
+//                .isEqualToIgnoringCase("frodo")
+//                .hasSize(9);
+      java.lang.Object ss="";
+      java.lang.Object ss1="";
 
-
-
+      AssertV.assertEquals(ss,"ss","sss");
 
 
 
