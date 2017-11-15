@@ -11,7 +11,7 @@ public class AssertJJ {
     public static void main(String[] args) {
         assertThat("abc").as("校验abc")
                 .startsWith("ab")
-                .endsWith("c");
+                .endsWith("c").contains("","").doesNotContain("");
 //                .isEqualToIgnoringCase("frodo")
 //                .hasSize(9);
       java.lang.Object ss="";
