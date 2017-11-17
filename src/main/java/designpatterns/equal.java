@@ -22,10 +22,12 @@ public class equal {
 
         private String a="a";  //堆，如果"a"再string池中不存在，就会新建一个new string（"a"）对象
         //存对象，堆区被所有线程共享，存放对象本身
+
          public void test1() {
              String b="b";
              //每线程都有一个栈，保存的是对象的引用，其他栈不能访问
          }
+
           //方法区/静态区，被所有线程共享 class，static
     }
 

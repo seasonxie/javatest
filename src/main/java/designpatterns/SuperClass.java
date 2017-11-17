@@ -30,8 +30,11 @@ public class SuperClass<T> {
 
     @SuppressWarnings("unchecked")
     public SuperClass() {
+
+        System.out.println("SuperClass");
         clazz = (Class<T>) ((ParameterizedType) super.getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
+        System.out.println(getClazz());
     }
 
     public Class<T> getClazz() {
@@ -40,6 +43,10 @@ public class SuperClass<T> {
 
     public void setClazz(Class<T> clazz) {
         this.clazz = clazz;
+    }
+
+    public void testOverride(){
+        System.out.println("-----");
     }
 
     /**
@@ -51,9 +58,14 @@ public class SuperClass<T> {
      * @param args
      */
     @BeforeMethod
-    public void beforeMethod(){
+    public void beforeMethod() throws IllegalAccessException, InstantiationException {
         System.out.println("beforeMethod");
-        //SuperClass<Person> superClass = new SubClass();
+        testOverride();
+        Person s=(Person)clazz.newInstance();
+        s.test1="11111111sss";
+        s.function();
+        s.testOverride();
+      /*  //SuperClass<Person> superClass = new SubClass();
         SuperClass<Person> superClass = new Person();
         //1.得到泛型类T实际的完整类名
         System.out.println(superClass.getClazz());
@@ -76,7 +88,7 @@ public class SuperClass<T> {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-        }
+        }*/
     }
  /*   public static void main(String[] args) {
         //SuperClass<Person> superClass = new SubClass();
