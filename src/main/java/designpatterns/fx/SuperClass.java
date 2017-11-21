@@ -1,10 +1,8 @@
-package designpatterns;
+package designpatterns.fx;
 
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
 
 public class SuperClass<T> {
 
@@ -64,7 +62,6 @@ public class SuperClass<T> {
         Person s=(Person)clazz.newInstance();
         s.test1="11111111sss";
         s.function();
-        s.testOverride();
       /*  //SuperClass<Person> superClass = new SubClass();
         SuperClass<Person> superClass = new Person();
         //1.得到泛型类T实际的完整类名
@@ -117,6 +114,12 @@ public class SuperClass<T> {
     }*/
 
 }
+class SubClass extends SuperClass<Person> {
 
+    public SubClass() {
+        super();
+    }
+
+}
 
 

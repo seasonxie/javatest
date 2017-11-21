@@ -1,18 +1,18 @@
-package designpatterns;
+package designpatterns.fx;
 
 import org.testng.annotations.Test;
 
-public class Person extends SuperClass<Person>{
+public class Person/*extends SuperClass<Person>*/{
     public Person() {
 
         super();
         System.out.println("superPerson");
     }
 
-    @Override
+ /*   @Override
     public void testOverride(){
         System.out.println("cccccccccc");
-    }
+    }*/
 
     public String test1="ss1";
 
