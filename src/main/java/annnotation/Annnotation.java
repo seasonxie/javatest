@@ -4,6 +4,8 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 /**
+ * usr/local/git/bin/git pull
+
  * Created by zhaotang on 2017/10/18.
  */
 public class Annnotation {
