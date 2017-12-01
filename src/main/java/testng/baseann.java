@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 public class baseann {
 
     @Test(threadPoolSize = 2, invocationCount = 10, timeOut = 1000)
-
     public void testServer() throws InterruptedException {
         // 检测启动的线程数,当启动的个数超过CPU核数时,其实是重新在调度
         // Thread.sleep(2000);

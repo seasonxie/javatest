@@ -1,14 +1,18 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="CPDTestSuite" parallel="false" verbose="1"> <!-- classes, methods, tests -->
-
+	<listeners>
+	<listener class-name="testng.retry.RetryListener" />
+	<listener class-name="testng.MyListener" />
+	</listeners>
 	<test name="FlymeSdkAppCpcAdTest" verbose="2" preserve-order="true" junit="false">
 		<classes>
 			<class name="testng.retry.Tests" >
-				<methods>
+			<!--	<methods>
 					<include name="test" />
-				</methods>
+				</methods>-->
 			</class>
+
 		</classes>
 	</test>
 </suite>

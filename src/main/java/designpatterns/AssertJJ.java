@@ -4,6 +4,8 @@ import org.assertj.core.api.SoftAssertions;
 import org.omg.CORBA.Object;
 import org.testng.Assert;
 
+import javax.xml.transform.Source;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -18,9 +20,6 @@ public class AssertJJ {
       java.lang.Object ss1="";
 
       AssertV.assertEquals(ss,"ss","sss");
-
-
-
     }
 
     public static void test(String sss){
