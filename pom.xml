@@ -60,6 +60,18 @@
             <artifactId>assertj-db</artifactId>
             <version>1.1.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.lazerycode.jmeter</groupId>
+            <artifactId>jmeter-maven-plugin</artifactId>
+            <version>1.10.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>ApacheJMeter_config</artifactId>
+                    <groupId>org.apache.jmeter</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 </dependencies>
 
 </project>
