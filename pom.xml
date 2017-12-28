@@ -62,6 +62,18 @@
         </dependency>
 
         <dependency>
+            <groupId>kg.apc</groupId>
+            <artifactId>jmeter-plugins</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.lazerycode.jmeter</groupId>
             <artifactId>jmeter-maven-plugin</artifactId>
             <version>1.10.1</version>

@@ -100,7 +100,7 @@ public class emple {
         System.out.println(jmeter.isActive());
         jmeter.run();
 
-        Map<Integer,List<SampleResult>> sampleResultsMap = requestCollector.getSampleResults();
+        Map<String,List<SampleResult>> sampleResultsMap = requestCollector.getSampleResults();
         System.out.println(sampleResultsMap.size());
         for (Object key : sampleResultsMap.keySet()) {
             List<SampleResult> list = sampleResultsMap.get(key);
