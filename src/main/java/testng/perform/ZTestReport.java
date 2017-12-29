@@ -1,4 +1,4 @@
-package testng;
+package testng.perform;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -145,6 +145,7 @@ public class ZTestReport implements IReporter {
 			result.put("beginTime", beginTime);
 			result.put("totalTime", totalTime+"ms");
 			result.put("testResult", listInfo);
+			result.put("performResult", PerformListener.pi);
 			Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
 			String template = this.read(templatePath);
 			BufferedWriter output = new BufferedWriter( new OutputStreamWriter(new FileOutputStream(new File(path)),"UTF-8"));

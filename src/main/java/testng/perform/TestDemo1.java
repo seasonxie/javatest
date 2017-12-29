@@ -1,4 +1,4 @@
-package testng;
+package testng.perform;
 
 import java.lang.reflect.Method;
 
@@ -8,13 +8,35 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import testng.model.PerformAnnotation;
+import testng.model.ReqMethod;
 
 
-
-@Listeners({ZTestReport.class})
+@Listeners({ZTestReport.class,PerformListener.class})
 public class TestDemo1{
-	
-	@BeforeMethod(description="测试方法前初始化")
+
+
+	@Test(description="测试testPerformance")
+	@PerformAnnotation(url = "www.meizu.com", method = ReqMethod.GET)
+	public void testPerformance(){
+		Reporter.log("测试testPerformance!");
+
+	}
+
+	@Test(description="测试testPerformance")
+	@PerformAnnotation(url = "www.meizu.com", method = ReqMethod.GET)
+	public void testPerformance1(){
+		Reporter.log("测试testPerformance!");
+
+	}
+
+	@Test(description="测试DEMO3")
+	public void testDemo3(){
+		Reporter.log("this is demo!");
+		Assert.assertEquals("a", "a", "should be equals.");
+	}
+
+	/*@BeforeMethod(description="测试方法前初始化")
 	public void beforeMethod(Method m){
 		if("testDemo3".equals(m.getName())){
 			int a = 1/0;
@@ -42,15 +64,11 @@ public class TestDemo1{
 		Assert.assertEquals(a, 1, "should be equals.");
 	} 
 	
-	@Test(description="测试DEMO3")
-	public void testDemo3(){
-		Reporter.log("this is demo!");
-		Assert.assertEquals("a", "a", "should be equals.");
-	} 
+
 	
 	@DataProvider(name="test")
 	public Object[][] dataProvider(){
 		return new Object[][]{{1},{2}};
-	}
+	}*/
 	
 }
