@@ -19,7 +19,6 @@ public class AssertJJ {
       java.lang.Object ss="";
       java.lang.Object ss1="";
 
-      AssertV.assertEquals(ss,"ss","sss");
     }
 
     public static void test(String sss){

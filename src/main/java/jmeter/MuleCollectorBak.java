@@ -19,11 +19,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 
-public class MuleCollector extends AbstractListenerElement implements SampleListener, Clearable, Serializable, TestStateListener, Remoteable, NoThreadClone, ThreadListener {
+public class MuleCollectorBak extends AbstractListenerElement implements SampleListener, Clearable, Serializable, TestStateListener, Remoteable, NoThreadClone, ThreadListener {
     AtomicLong activeThreads = new AtomicLong(0);
     private static final Logger log = LoggingManager.getLoggerForClass();
-    Map<String,List<Long>> responseTimes = Collections.synchronizedMap(new HashMap<String,List<Long>>());
-    private List<Long> allResponseTimes =  Collections.synchronizedList(new ArrayList<Long>());
+    HashMap<String,ArrayList<Long>> responseTimes = new HashMap<String,ArrayList<Long>>();
+    private ArrayList<Long> allResponseTimes = new ArrayList<Long>();
     private long startTimeInMillis;
     private AtomicInteger failedReq = new AtomicInteger(0);
     private boolean sorted = false;
@@ -37,7 +37,7 @@ public class MuleCollector extends AbstractListenerElement implements SampleList
     private Thread sorter;
     private HashMap<String, Double> slaResults;
 
-    MuleCollector(int expectedThreads, String logFile){
+    MuleCollectorBak(int expectedThreads, String logFile){
         this.expectedThreads = expectedThreads;
         this.logFile = logFile;
     }
@@ -54,8 +54,7 @@ public class MuleCollector extends AbstractListenerElement implements SampleList
     @Override
     public void sampleOccurred(SampleEvent sampleEvent)
     {
-          sorted = false;
-     /*   if (saveSamples){*/
+        if (saveSamples){
             SampleResult result = sampleEvent.getResult();
             long latency = result.getEndTime() - result.getStartTime();
             String threadName = result.getThreadName();
@@ -67,7 +66,7 @@ public class MuleCollector extends AbstractListenerElement implements SampleList
 
                 requestSizes.put(threadName, requestSizes.get(threadName) + bytes);
             } else {
-                List<Long> thisThreadLatencies = Collections.synchronizedList(new  ArrayList<Long>(10000));
+                ArrayList<Long> thisThreadLatencies = new  ArrayList<Long>(10000);
                 thisThreadLatencies.add(latency);
                 responseTimes.put(threadName, thisThreadLatencies);
 
@@ -78,15 +77,15 @@ public class MuleCollector extends AbstractListenerElement implements SampleList
                 failedReq.incrementAndGet();
             }
 
-
-/*        }else {
+            sorted = false;
+        }else {
             String threadName = sampleEvent.getResult().getThreadName();
             if (!responseTimes.containsKey(threadName) ) {
                 responseTimes.put(threadName, new  ArrayList<Long>(10000));
                 requestSizes.put(threadName,0L);
             }
 
-        }*/
+        }
 
     }
 
@@ -315,9 +314,9 @@ public class MuleCollector extends AbstractListenerElement implements SampleList
 
     private class ReportSorter implements Runnable
     {
-        MuleCollector reporter;
+        MuleCollectorBak reporter;
 
-        ReportSorter(MuleCollector reporter){
+        ReportSorter(MuleCollectorBak reporter){
             this.reporter = reporter;
         }
 
