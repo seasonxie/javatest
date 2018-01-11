@@ -1,12 +1,13 @@
 package apitest.assertimpl;
 
+import apitest.assertimpl.assertbase.AssertBase;
 import com.mashape.unirest.http.HttpResponse;
 import apitest.Assertinfo;
 import apitest.EumAction;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class ContextAssertImpl<T,R> extends  AssertBase implements AssertActionI<T,R> {
+public class ContextAssertImpl<T,R> extends AssertBase implements AssertActionI<T,R> {
     @Override
     public boolean api_Assert(Assertinfo assertinfo, T apiTest, R Response) {
         String response="";

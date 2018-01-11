@@ -1,5 +1,6 @@
 package apitest.assertimpl;
 
+import apitest.assertimpl.assertbase.JsonAssertBase;
 import com.mashape.unirest.http.HttpResponse;
 import apitest.Assertinfo;
 import apitest.EumAction;
@@ -8,7 +9,7 @@ import net.minidev.json.JSONObject;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class JsonTextAssertImpl<T, R>  extends AssertBase implements AssertActionI<T, R>{
+public class JsonTextAssertImpl<T, R>  extends JsonAssertBase implements AssertActionI<T, R>{
     @Override
     public boolean api_Assert(Assertinfo assertinfo, T apiTest, R Response) {
         HttpResponse Response1 = (HttpResponse) Response;
