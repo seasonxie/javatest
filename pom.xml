@@ -20,12 +20,14 @@
         </plugins>
     </build>
     <dependencies>
+
     <dependency>
         <groupId>org.testng</groupId>
         <artifactId>testng</artifactId>
         <version>6.9.9</version>
     </dependency>
 
+        <!--json-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
@@ -39,17 +41,26 @@
         </dependency>
 
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.1.28</version>
+        </dependency>
+
+        <!--guavaCache-->
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>19.0</version>
         </dependency>
 
+       <!-- json-schema-->
         <dependency>
             <groupId>com.github.fge</groupId>
             <artifactId>json-schema-validator</artifactId>
             <version>2.2.6</version>
         </dependency>
 
+      <!-- assertj-->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
@@ -61,24 +72,21 @@
             <version>1.1.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>kg.apc</groupId>
-            <artifactId>jmeter-plugins</artifactId>
-            <version>1.0.0</version>
-        </dependency>
 
+
+        <!--dbutils-->
         <dependency>
             <groupId>commons-dbutils</groupId>
             <artifactId>commons-dbutils</artifactId>
             <version>1.6</version>
         </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.30</version>
         </dependency>
 
+       <!-- unirest-->
         <dependency>
             <groupId>com.mashape.unirest</groupId>
             <artifactId>unirest-java</artifactId>
@@ -100,24 +108,16 @@
             <version>4.3.6</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.3.1</version>
-        </dependency>
 
-        <dependency>
-            <groupId>com.google.auto.service</groupId>
-            <artifactId>auto-service</artifactId>
-            <version>1.0-rc1</version>
-        </dependency>
 
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.1.28</version>
-        </dependency>
 
+
+        <!-- jmeter-->
+        <dependency>
+            <groupId>kg.apc</groupId>
+            <artifactId>jmeter-plugins</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <dependency>
             <groupId>com.lazerycode.jmeter</groupId>
             <artifactId>jmeter-maven-plugin</artifactId>

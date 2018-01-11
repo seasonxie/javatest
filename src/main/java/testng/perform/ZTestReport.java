@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.sf.json.JSONObject;
 import org.testng.IReporter;
 import org.testng.IResultMap;
 import org.testng.ISuite;
@@ -27,8 +28,7 @@ import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.xml.XmlSuite;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 
 public class ZTestReport implements IReporter {
 	
@@ -146,10 +146,12 @@ public class ZTestReport implements IReporter {
 			result.put("totalTime", totalTime+"ms");
 			result.put("testResult", listInfo);
 			result.put("performResult", PerformListener.pi);
-			Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+
 			String template = this.read(templatePath);
 			BufferedWriter output = new BufferedWriter( new OutputStreamWriter(new FileOutputStream(new File(path)),"UTF-8"));
-			template = template.replaceFirst("\\$\\{resultData\\}", gson.toJson(result));
+
+			JSONObject jsonObject = JSONObject.fromObject(result);
+			template = template.replaceFirst("\\$\\{resultData\\}", jsonObject.toString());
 			output.write(template);
 			output.flush();
 			output.close();
