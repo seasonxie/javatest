@@ -7041,7 +7041,7 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>详细数据</h5>
+                    <h5>接口数据</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -7265,13 +7265,13 @@
                         "<td>" + n["className"] + "</td>" +
                         "<td>" + n["methodName"] + "</td>" +
                         "<td>" + n["description"] + "</td>" +
-                        "<td>" + n["Requests"] + "</td>" +
-                        "<td>" + n["Throughput"] + "</td>" +
-                        "<td>" + n["BytesPerRequestAvg"] + "</td>" +
-                        "<td>" + n["Error"] + "</td>" +
-                        "<td>" + n["MaxLatency"] + "</td>" +
-                        "<td>" + n["MinLatency"] + "</td>" +
-                        "<td>" + n["AvgLatency"] + "</td>" +
+                        "<td>" + n["requests"] + "</td>" +
+                        "<td>" + n["throughput"] + "</td>" +
+                        "<td>" + n["bytesPerRequestAvg"] + "</td>" +
+                        "<td>" + n["error"] + "</td>" +
+                        "<td>" + n["maxLatency"] + "</td>" +
+                        "<td>" + n["minLatency"] + "</td>" +
+                        "<td>" + n["avgLatency"] + "</td>" +
                         "<td>" + n["_90thPercentile"] + "</td>" +
                         "</tr>"
                     $("#performBody").append(tr);

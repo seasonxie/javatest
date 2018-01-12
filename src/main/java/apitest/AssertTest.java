@@ -1,7 +1,7 @@
 package apitest;
 
-import apitest.assertimpl.assertbase.AssertBase;
 import apitest.assertimpl.assertbase.JsonAssertBase;
+import apitest.model.EumAction;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
@@ -17,6 +17,9 @@ public class AssertTest {
 
 
     public static void main(String[] args) {
+        Map ss=new HashMap();
+
+
         System.out.println(a.getJsonObject(sjson,"$.store.*").getClass());
         System.out.println(a.getJsonObject(sjson,"$.expensive").getClass());
         System.out.println(a.getJsonObject(sjson,"$.store.book[*]").getClass());
@@ -26,6 +29,8 @@ public class AssertTest {
         for (EumAction.AssertActions e : EumAction.AssertActions.values()) {
             System.out.println(e.toString());
         }
+
+
     }
 
 

@@ -1,10 +1,6 @@
 package apitest.assertimpl.assertbase;
 
-import com.alibaba.fastjson.JSON;
-import com.jayway.jsonpath.JsonPath;
-import apitest.EumAction;
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
+import apitest.model.EumAction;
 import org.testng.Assert;
 
 
@@ -146,7 +142,7 @@ public class AssertBase {
         return false;
     }
 
-    public static boolean isBaseMapObject(Object expectedValue) {
+    public static boolean isJsonMapObject(Object expectedValue) {
         if (isPrimitiveAndList(expectedValue)) {
             return false;
         } else {
@@ -167,7 +163,7 @@ public class AssertBase {
                 || expectedValue.getClass().isAssignableFrom(Byte.class)
                 || expectedValue.getClass().isAssignableFrom(Long.class)
                 || expectedValue.getClass().isAssignableFrom(Float.class)
-                || expectedValue.getClass().isAssignableFrom(Date.class) || isList(expectedValue)) {
+                || expectedValue.getClass().isAssignableFrom(Date.class) || isList(expectedValue)||expectedValue.getClass().isArray()) {
             return true;
         } else {
             return false;

@@ -32,14 +32,25 @@ public class PerformListener extends TestListenerAdapter {
             info.setClassName(iTestResult.getInstanceName());
             info.setMethodName(iTestResult.getName());
             info.setDescription(iTestResult.getMethod().getDescription());
-            info.set_90thPercentile("25");
-            info.setAvgLatency("23");
-            info.setBytesPerRequestAvg("98.0 B");
-            info.setError("0");
-            info.setRequests("1001");
-            info.setMinLatency("21");
-            info.setMaxLatency("29");
-            info.setThroughput("600.479");
+            if(pi.size()>0){
+                info.set_90thPercentile("25");
+                info.setAvgLatency("23");
+                info.setBytesPerRequestAvg("98.0 B");
+                info.setError("0");
+                info.setRequests("1001");
+                info.setMinLatency("21");
+                info.setMaxLatency("29");
+                info.setThroughput("600.479");
+            }else{
+                info.set_90thPercentile("27");
+                info.setAvgLatency("24");
+                info.setBytesPerRequestAvg("68.0 B");
+                info.setError("0");
+                info.setRequests("2001");
+                info.setMinLatency("23");
+                info.setMaxLatency("37");
+                info.setThroughput("660.479");
+            }
             pi.add(info);
         }
     }

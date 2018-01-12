@@ -1,8 +1,8 @@
 package apitest.assertimpl;
 
 import com.mashape.unirest.http.HttpResponse;
-import apitest.Assertinfo;
-import apitest.EumAction;
+import apitest.model.Assertinfo;
+import apitest.model.EumAction;
 
 
 public class CodeAssertImpl<T,R extends HttpResponse> implements AssertActionI<T,R> {

@@ -16,16 +16,16 @@ import testng.model.ReqMethod;
 public class TestDemo1{
 
 
-	@Test(description="测试testPerformance")
-	@PerformAnnotation(url = "www.meizu.com", method = ReqMethod.GET)
-	public void testPerformance(){
+	@Test(description="bro.test.cn/appstore/search.do")
+	@PerformAnnotation(url = "https://bro.test.cn/appstore/search.do?keyword=王者荣耀", method = ReqMethod.GET)
+	public void testPerformance1(){
 		Reporter.log("测试testPerformance!");
 
 	}
 
-	@Test(description="测试testPerformance")
-	@PerformAnnotation(url = "www.meizu.com", method = ReqMethod.GET)
-	public void testPerformance1(){
+	@Test(description="t-e.test.cn/track/public/unbidd")
+	@PerformAnnotation(url = "https://t-e.test.cn/track/public/unbidding?request_id=9e90867d", method = ReqMethod.GET)
+	public void testPerformance2(){
 		Reporter.log("测试testPerformance!");
 
 	}

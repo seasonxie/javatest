@@ -2,8 +2,8 @@ package apitest.assertimpl;
 
 import apitest.assertimpl.assertbase.JsonAssertBase;
 import com.mashape.unirest.http.HttpResponse;
-import apitest.Assertinfo;
-import apitest.EumAction;
+import apitest.model.Assertinfo;
+import apitest.model.EumAction;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 

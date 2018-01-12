@@ -1,6 +1,6 @@
 package apitest.assertimpl;
 
-import apitest.Assertinfo;
+import apitest.model.Assertinfo;
 
 public interface AssertActionI<T,R> {
 

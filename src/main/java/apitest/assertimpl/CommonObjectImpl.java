@@ -1,6 +1,6 @@
 package apitest.assertimpl;
 
-import apitest.Assertinfo;
+import apitest.model.Assertinfo;
 import apitest.assertimpl.assertbase.AssertBase;
 
 
@@ -18,7 +18,7 @@ public class CommonObjectImpl<T,R> extends AssertBase implements AssertActionI<T
 
     @Override
     public boolean api_Assert(Assertinfo assertinfo, T request, R Response) {
-       Map<String, Object> res1 = convertToMap(Response);
+        Map<String, Object> res1 = convertToMap(Response);
         Map<String, Object> res = convertToMap(request);
     return false;
     }
@@ -30,7 +30,7 @@ public class CommonObjectImpl<T,R> extends AssertBase implements AssertActionI<T
 
     @Override
     public boolean matchCheckType(Assertinfo assertinfo, T request, R Response) {
-        return isBaseMapObject(Response);
+        return isJsonMapObject(Response);
     }
 
 

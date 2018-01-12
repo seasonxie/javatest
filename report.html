@@ -7041,7 +7041,7 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>详细数据</h5>
+                    <h5>接口数据</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -7073,7 +7073,7 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>编号</th><th>测试类</th><th>测试方法</th><th>用例描述</th><th>耗时</th><th>结果</th><th>操作</th><th>操作</th>
+                            <th>编号</th><th>测试类</th><th>测试方法</th><th>用例描述</th><th>耗时</th><th>结果</th><th>操作</th>
                         </tr>
                         </thead>
                         <tbody id="detailBody">
@@ -7156,75 +7156,7 @@
 	}
 </script>
 <script type="text/javascript">
-    var resultData = {
-  "testPass": 3,
-  "testResult": [
-    {
-      "className": "testng.perform.TestDemo1",
-      "methodName": "testDemo3",
-      "description": "测试DEMO3",
-      "spendTime": "12ms",
-      "status": "成功",
-      "log": [
-        "this is demo!"
-      ]
-    },
-    {
-      "className": "testng.perform.TestDemo1",
-      "methodName": "testPerformance",
-      "description": "测试testPerformance",
-      "spendTime": "1ms",
-      "status": "成功",
-      "log": [
-        "测试testPerformance!"
-      ]
-    },
-    {
-      "className": "testng.perform.TestDemo1",
-      "methodName": "testPerformance1",
-      "description": "测试testPerformance",
-      "spendTime": "1ms",
-      "status": "成功",
-      "log": [
-        "测试testPerformance!"
-      ]
-    }
-  ],
-  "testName": "20171229113218576",
-  "performResult": [
-    {
-      "className": "testng.perform.TestDemo1",
-      "methodName": "testPerformance",
-      "description": "测试testPerformance",
-      "Requests": "1001",
-      "Throughput": "600.479",
-      "BytesPerRequestAvg": "98.0 B",
-      "Error": "0",
-      "AvgLatency": "23",
-      "MinLatency": "21",
-      "MaxLatency": "29",
-      "_90thPercentile": "25"
-    },
-    {
-      "className": "testng.perform.TestDemo1",
-      "methodName": "testPerformance1",
-      "description": "测试testPerformance",
-      "Requests": "1001",
-      "Throughput": "600.479",
-      "BytesPerRequestAvg": "98.0 B",
-      "Error": "0",
-      "AvgLatency": "23",
-      "MinLatency": "21",
-      "MaxLatency": "29",
-      "_90thPercentile": "25"
-    }
-  ],
-  "testAll": 3,
-  "testFail": 0,
-  "beginTime": "2017-12-29 11:32:18.591",
-  "totalTime": "14ms",
-  "testSkip": 0
-};
+    var resultData = {"testPass":3,"testResult":[{"className":"testng.perform.TestDemo1","description":"测试DEMO3","log":["this is demo!"],"methodName":"testDemo3","name":"","spendTime":"13ms","status":"成功"},{"className":"testng.perform.TestDemo1","description":"bro.test.cn/appstore/search.do","log":["测试testPerformance!"],"methodName":"testPerformance1","name":"","spendTime":"2ms","status":"成功"},{"className":"testng.perform.TestDemo1","description":"t-e.test.cn/track/public/unbidd","log":["测试testPerformance!"],"methodName":"testPerformance2","name":"","spendTime":"1ms","status":"成功"}],"testName":"20180112151209863","performResult":[{"_90thPercentile":"27","avgLatency":"24","bytesPerRequestAvg":"68.0 B","className":"testng.perform.TestDemo1","description":"bro.test.cn/appstore/search.do","error":"0","maxLatency":"37","method":"","methodName":"testPerformance1","minLatency":"23","name":"","requests":"2001","status":"","throughput":"660.479","url":""},{"_90thPercentile":"25","avgLatency":"23","bytesPerRequestAvg":"98.0 B","className":"testng.perform.TestDemo1","description":"t-e.test.cn/track/public/unbidd","error":"0","maxLatency":"29","method":"","methodName":"testPerformance2","minLatency":"21","name":"","requests":"1001","status":"","throughput":"600.479","url":""}],"testAll":3,"testFail":0,"beginTime":"2018-01-12 15:12:09.878","totalTime":"16ms","testSkip":0};
 
     function clickRow(obj){
         $("#detailBody").children("tr").attr("style","font-family: Consolas");
@@ -7242,30 +7174,14 @@
             $.each(logs, function (i, n) {
                 detailLog = detailLog + "<p>" + n + "</p>";
             });
-            $(obj).parent().parent().after("<tr class='newadd'><td colspan='" + len + "'><div style='font-family: Consolas;font-size:12px'>" + detailLog + "</div></td></tr>");
+            $(obj).parent().parent().after("<tr><td colspan='" + len + "'><div style='font-family: Consolas;font-size:12px'>" + detailLog + "</div></td></tr>");
         } else if ($(obj).text() == '收缩') {
-            $(obj).parent().parent().nextAll('.newadd').remove();
-            //$(obj).text("展开");
+            $(obj).parent().parent().next().remove();
+            $(obj).text("展开");
             $(obj).removeClass("btn-danger");
             $(obj).addClass("btn-primary");
         }
 
-    }
-
-    function adds(obj) {
-        if ($(obj).text() == 'add') {
-            $(obj).text("收缩");
-
-        }
-        var len = $(obj).parent().parent().children().length;
-        var detailLog = "";
-        var logs = resultData["testResult"][parseInt($(obj).attr("buttonIndex"))]["log"];
-        $(obj).removeClass("btn-primary");
-        $(obj).addClass("btn-danger");
-        $.each(logs, function (i, n) {
-            detailLog = detailLog + "<p>" + n + "</p>";
-        });
-        $(obj).parent().parent().after("<tr class='newadd's><td colspan='" + len + "'><div style='font-family: Consolas;font-size:12px'>" + detailLog + "</div></td></tr>");
     }
     $(function () {
         $("#testName").text(resultData["testName"]);
@@ -7328,8 +7244,7 @@
                         "<td>" + n["methodName"] + "</td>" +
                         "<td>" + n["description"] + "</td>" +
                         "<td>" + n["spendTime"] + "</td>" +
-                        status + "<td><button type='button' onclick='details(this)' buttonIndex='" + i + "' class='btn btn-primary btn-xs' style='margin-bottom: 0px'>展开</button></td>" +
-                        "<td><button type='button' onclick='adds(this)' buttonIndex='" + i + "' class='btn btn-primary btn-xs' style='margin-bottom: 0px'>add</button></td></tr>"
+                        status + "<td><button type='button' onclick='details(this)' buttonIndex='" + i + "' class='btn btn-primary btn-xs' style='margin-bottom: 0px'>展开</button></td></tr>"
                     $("#detailBody").append(tr);
                 }
             });
@@ -7350,13 +7265,13 @@
                         "<td>" + n["className"] + "</td>" +
                         "<td>" + n["methodName"] + "</td>" +
                         "<td>" + n["description"] + "</td>" +
-                        "<td>" + n["Requests"] + "</td>" +
-                        "<td>" + n["Throughput"] + "</td>" +
-                        "<td>" + n["BytesPerRequestAvg"] + "</td>" +
-                        "<td>" + n["Error"] + "</td>" +
-                        "<td>" + n["MaxLatency"] + "</td>" +
-                        "<td>" + n["MinLatency"] + "</td>" +
-                        "<td>" + n["AvgLatency"] + "</td>" +
+                        "<td>" + n["requests"] + "</td>" +
+                        "<td>" + n["throughput"] + "</td>" +
+                        "<td>" + n["bytesPerRequestAvg"] + "</td>" +
+                        "<td>" + n["error"] + "</td>" +
+                        "<td>" + n["maxLatency"] + "</td>" +
+                        "<td>" + n["minLatency"] + "</td>" +
+                        "<td>" + n["avgLatency"] + "</td>" +
                         "<td>" + n["_90thPercentile"] + "</td>" +
                         "</tr>"
                     $("#performBody").append(tr);

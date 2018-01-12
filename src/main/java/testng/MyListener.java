@@ -55,7 +55,7 @@ public class MyListener extends TestListenerAdapter /*implements IInvokedMethodL
     }
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-
+        System.out.println(iTestResult.getTestContext().getAttribute("aaa")+" -----------------");
     }
 
 

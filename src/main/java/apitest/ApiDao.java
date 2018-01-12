@@ -1,5 +1,8 @@
 package apitest;
 
+import apitest.model.ApiTest;
+import apitest.model.Assertinfo;
+import apitest.model.EumAction;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -77,11 +80,6 @@ public class ApiDao {
         }
     }
 
-    public static Assertinfo getCommonObjectAssert(){
-        Assertinfo as=new Assertinfo();
-        as.setAssert_type("");
-        return as;
-    }
 
     public HttpResponse<String> getResponse(ApiTest at){
         HttpResponse<String> response =null;

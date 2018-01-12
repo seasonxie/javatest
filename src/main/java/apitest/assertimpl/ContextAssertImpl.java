@@ -1,9 +1,10 @@
 package apitest.assertimpl;
 
+import apitest.AssertC;
 import apitest.assertimpl.assertbase.AssertBase;
 import com.mashape.unirest.http.HttpResponse;
-import apitest.Assertinfo;
-import apitest.EumAction;
+import apitest.model.Assertinfo;
+import apitest.model.EumAction;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -45,6 +46,7 @@ public class ContextAssertImpl<T,R> extends AssertBase implements AssertActionI<
 
     public static boolean action_EQUAL(Object response,Object assertValue){
         System.out.println("-------equal  "+assertValue);
+        AssertC.fail();
         return true;
     }
 

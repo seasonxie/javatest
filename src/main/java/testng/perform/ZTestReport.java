@@ -151,6 +151,7 @@ public class ZTestReport implements IReporter {
 			BufferedWriter output = new BufferedWriter( new OutputStreamWriter(new FileOutputStream(new File(path)),"UTF-8"));
 
 			JSONObject jsonObject = JSONObject.fromObject(result);
+			System.out.println(jsonObject.toString());
 			template = template.replaceFirst("\\$\\{resultData\\}", jsonObject.toString());
 			output.write(template);
 			output.flush();
