@@ -8,7 +8,7 @@ import java.util.*;
 
 import static apitest.assertimpl.assertbase.JsonAssertBase.convertToMap;
 
-public class AssertC extends Assert {
+    public class AssertC extends Assert {
 
     /**
      json->map （原则：只取第一层的keyvalue，如果有多层请处理后再传入）
@@ -38,6 +38,13 @@ public class AssertC extends Assert {
         }
     }
 
+        /**
+         *
+         * @param actual
+         * @param expect
+         * @param message
+         * 当actual和expect不能转换成map做对比的时候，调用testng原生的Asssert
+         */
     static public void assertEquals(Object actual, Object expect, String message) {
         if (!assertMapEquals(actual, expect)) {
             Assert.assertEquals(actual, expect, message);

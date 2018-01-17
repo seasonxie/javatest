@@ -55,12 +55,12 @@ public class ApiDao {
 
     public static void main(String[] args) {
         ApiDao ad=new ApiDao();
-        List<ApiTest> ss=ad.getApiTestCase("select * from apidata");
-        System.out.println(ss.size());
+        List<ApiTest> ss=ad.getApiTestCase("select * from apidata where id=237");
+        System.out.println("CASES: "+ss.size());
         for(ApiTest at:ss){
             HttpResponse<String> response =ad.getResponse(at);
             List<Assertinfo> ais=ad.getAssertInfo("select * from assertinfo where caseid="+at.getId());
-            System.out.println(ais.size());
+            System.out.println("ASSERTS: "+ais.size());
             for(Assertinfo ai:ais){
                 assert_plus(ai,ad,response);
             }
@@ -70,14 +70,15 @@ public class ApiDao {
     }
 
     public static void assert_plus(Assertinfo ai,Object request,Object response){
-        System.out.println(ai.getAssert_type() +" -----------------------");
         for(AssertActionI al: assertList){
             if(al.getFlag().toString().equals(ai.getAssert_type().trim())){
-                System.out.println("check case "+al.getFlag().toString());
+                System.out.println("Check Case: "+al.getFlag().toString()+" -- "+ai.getAssert_action() +" = "+ai.getAssert_value());
                 al.api_Assert(ai,request,response);
                 break;
             }
         }
+
+
     }
 
 

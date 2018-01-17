@@ -8,29 +8,17 @@ import apitest.model.EumAction;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class ContextAssertImpl<T,R> extends AssertBase implements AssertActionI<T,R> {
+public class ContextAssertImpl<T, R> extends AssertBase implements AssertActionI<T, R> {
     @Override
     public boolean api_Assert(Assertinfo assertinfo, T apiTest, R Response) {
-        String response="";
-        if(Response.getClass()==HttpResponse.class){
-            response=((HttpResponse)Response).getBody().toString();
-        }else{
-            response=Response.toString();
+        String response = "";
+        if (Response.getClass() == HttpResponse.class) {
+            response = ((HttpResponse) Response).getBody().toString();
+        } else {
+            response = Response.toString();
         }
-        String actionType=assertinfo.getAssert_action().trim();
-
-        try {
-            getAction(this.getClass(),actionType,response,assertinfo.getAssert_value());
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return false;
+        String actionType = assertinfo.getAssert_action().trim();
+        return getAction(this.getClass(), actionType, response, assertinfo.getAssert_value());
     }
 
     @Override
@@ -44,39 +32,38 @@ public class ContextAssertImpl<T,R> extends AssertBase implements AssertActionI<
     }
 
 
-    public static boolean action_EQUAL(Object response,Object assertValue){
-        System.out.println("-------equal  "+assertValue);
-        AssertC.fail();
+    public  boolean action_EQUAL(Object response, Object assertValue) {
+        base_EQUAL(response.toString(),assertValue.toString());
         return true;
     }
 
-    public static boolean action_CONTAINS(Object response,Object assertValue){
-        System.out.println("-------ccccc  "+assertValue);
+    public  boolean action_CONTAINS(Object response, Object assertValue) {
+        base_CONTAINS(response,assertValue);
         return true;
     }
 
-    public boolean action_SIZE(Object response,Object assertValue){
-
+    public boolean action_SIZE(Object response, Object assertValue) {
+        base_SIZE(response,assertValue);
         return true;
     }
 
-    public boolean action_ISEMPTY(Object response,Object assertValue){
-
+    public boolean action_ISEMPTY(Object response, Object assertValue) {
+        base_ISEMPTY(response);
         return true;
     }
 
-    public boolean action_KEY_VALUE(Object response,Object assertValue){
+    public boolean action_KEY_VALUE(Object response, Object assertValue) {
 
-        return true;
+        return false;
     }
 
-    public boolean action_CONTAINS_KEY(Object response,Object assertValue){
+    public boolean action_CONTAINS_KEY(Object response, Object assertValue) {
 
-        return true;
+        return false;
     }
 
-    public boolean action_CONTAINS_VALUE(Object response,Object assertValue){
+    public boolean action_CONTAINS_VALUE(Object response, Object assertValue) {
 
-        return true;
+        return false;
     }
 }

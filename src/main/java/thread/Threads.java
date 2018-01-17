@@ -31,6 +31,9 @@ public class Threads {
         }
     }
 
+
+    //Callable的任务执行后可返回值，而Runnable的任务是不能返回值得
+    //call方法可以抛出异常，run方法不可以
     public class MyCallable<V> implements Callable<V> {
         @Override
         public V call() throws Exception {
@@ -47,6 +50,7 @@ public class Threads {
             Thread oneThread = new Thread(oneTask);
             oneThread.start();
         }
+        //Future对象，Future 表示异步计算的结果。它提供了检查计算是否完成的方法，以等待计算的完成，并获取计算的结果。计算完成后只能使用 get 方法来获取结果
 
     }
 }

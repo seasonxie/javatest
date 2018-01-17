@@ -9,7 +9,7 @@ public class EumAction {
     }
 
     public enum AssertActions{
-        EQUAL,CONTAINS,SIZE,ISEMPTY,KEY_VALUE,CONTAINS_KEY,CONTAINS_VALUE;
+        EQUAL,CONTAINS,SIZE,ISEMPTY,KEY_VALUE,CONTAINS_KEY,CONTAINS_VALUE,TYPE;
     }
 
 

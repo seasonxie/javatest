@@ -1,7 +1,11 @@
 package apitest.assertimpl.assertbase;
 
+import apitest.AssertC;
+import apitest.model.Assertinfo;
+import apitest.model.EumAction;
 import com.alibaba.fastjson.JSON;
 import com.jayway.jsonpath.JsonPath;
+import net.minidev.json.JSONValue;
 import org.testng.Assert;
 
 import java.util.HashMap;
@@ -78,16 +82,26 @@ public class JsonAssertBase extends AssertBase {
         return expect;
     }
 
-    public static Object getJsonObject(String json, String value){
+    public static Object getJsonObject(String json,Assertinfo ai){
+        if(!JSONValue.isValidJson(json)){
+            Assert.fail("Is not a json : "+json);
+        }
         try {
-            return JsonPath.read(json,value);
+            Object text=JsonPath.read(json,ai.getJsonpath());
+            System.out.println(text.toString());
+            return text;
         } catch (Exception e) {
-            Assert.fail("JsonPath: "+value+" is incorrect");
+            Assert.fail("JsonPath: "+ai.getJsonpath()+" is incorrect");
             e.printStackTrace();
         }
         return null;
     }
 
+    public static boolean json_SIZE(int response, int assertValue) {
+        AssertC.assertEquals(response,assertValue, getMessage(response, assertValue,
+                EumAction.AssertActions.SIZE.toString()));
+        return true;
+    }
 
 
 }

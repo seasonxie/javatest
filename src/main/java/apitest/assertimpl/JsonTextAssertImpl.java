@@ -1,56 +1,27 @@
 package apitest.assertimpl;
 
+import apitest.AssertC;
 import apitest.assertimpl.assertbase.JsonAssertBase;
 import com.mashape.unirest.http.HttpResponse;
 import apitest.model.Assertinfo;
 import apitest.model.EumAction;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
+import net.minidev.json.JSONValue;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class JsonTextAssertImpl<T, R>  extends JsonAssertBase implements AssertActionI<T, R>{
+public class JsonTextAssertImpl<T, R> extends JsonAssertBase implements AssertActionI<T, R> {
     @Override
     public boolean api_Assert(Assertinfo assertinfo, T apiTest, R Response) {
         HttpResponse Response1 = (HttpResponse) Response;
-   /*     if ((assertinfo.getAssert_action().equals(EumAction.AssertActions.CONTAINS.toString()))) {
-            if (assertinfo.getJsonpath() == null || assertinfo.getJsonpath().isEmpty()) {
-                System.out.println("json CONTAINS");
-                System.out.println(String.valueOf(Response1.getBody()).contains(assertinfo.getAssert_value()) == true);
-            } else {
-                System.out.println("jsonpath CONTAINS");
-                String verifyText = "";
-                verifyText = String.valueOf(getJsonObject(verifyText,Response1.getBody().toString().trim(),assertinfo.getJsonpath()));
-                System.out.println(String.valueOf(verifyText.contains(assertinfo.getAssert_value()) == true));
-            }
-
-        }*/
-        if (assertinfo.getJsonpath() == null || assertinfo.getJsonpath().isEmpty()) {
-            System.out.println("json CONTAINS");
-            System.out.println(String.valueOf(Response1.getBody()).contains(assertinfo.getAssert_value()) == true);
-        } else {
-            System.out.println("jsonpath CONTAINS");
-            handlerJsonAssert(Response1.getBody().toString().trim(),assertinfo.getJsonpath(),assertinfo.getAssert_value(),assertinfo.getAssert_action());
+        if ((assertinfo.getJsonpath() == null || assertinfo.getJsonpath().isEmpty())) {
+            assertinfo.setJsonpath("$.");
         }
+        return getAction(JsonTextAssertImpl.class, assertinfo.getAssert_action(),
+                getJsonObject(Response1.getBody().toString().trim(), assertinfo), assertinfo);
 
-        return false;
     }
-
-    public static void handlerJsonAssert(String json,String jsonPath,Object checkValue,String act){
-        Object o=getJsonObject(json,jsonPath);
-        try {
-            getAction(JsonTextAssertImpl.class,act.toString(),o,checkValue);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-    }
-
 
 
     @Override
@@ -64,52 +35,113 @@ public class JsonTextAssertImpl<T, R>  extends JsonAssertBase implements AssertA
     }
 
 
-    public static boolean action_EQUAL(Object response,Object assertValue){
-        System.out.println("-------equal  "+assertValue);
-        if(response.getClass()==JSONArray.class){
+    public static boolean action_TYPE(Object response, Object assertValue) {
+        String valueType = ((Assertinfo) assertValue).getValue_class();
+        checkType(response, valueType);
+        return true;
+    }
 
-        }else if(response.getClass()==JSONObject.class){
-
-        }else{
-
+    public static boolean action_EQUAL(Object response, Object assertValue) {
+        Object expect = ((Assertinfo) assertValue).getAssert_value();
+        String valueType = ((Assertinfo) assertValue).getValue_class();
+        Object actual = null;
+        if (response.getClass() == JSONArray.class) {
+            base_EQUAL(actual = ((JSONArray) response).toJSONString(), expect);
+        } else if (response.getClass() == JSONObject.class) {
+            base_EQUAL(actual = ((JSONObject) response).toJSONString(), expect);
+        } else {
+            base_EQUAL(actual = response, expect);
+        }
+        if (valueType != null && !valueType.isEmpty()) {
+            checkType(actual, valueType);
         }
         return true;
     }
 
-    public static boolean action_CONTAINS(Object response,Object assertValue){
-        if(response.getClass()==JSONArray.class){
-            //((JSONArray)response)
-        }else if(response.getClass()==JSONObject.class){
-            //((JSONObject)response)
-        }else{
-            System.out.println("-------ccccc11  "+response);
-            System.out.println("-------ccccc  "+assertValue);
+    public static boolean action_CONTAINS(Object response, Object assertValue) {
+        Object expect = ((Assertinfo) assertValue).getAssert_value();
+        String valueType = ((Assertinfo) assertValue).getValue_class();
+        Object actual = null;
+        if (response.getClass() == JSONArray.class) {
+            base_CONTAINS(actual = ((JSONArray) response).toJSONString(), expect);
+        } else if (response.getClass() == JSONObject.class) {
+            base_CONTAINS(actual = ((JSONObject) response).toJSONString(), expect);
+        } else {
+            base_CONTAINS(actual = response, expect);
+        }
+        if (valueType != null && !valueType.isEmpty()) {
+            checkType(actual, valueType);
         }
         return true;
     }
 
-    public boolean action_SIZE(Object response,Object assertValue){
-
+    public boolean action_SIZE(Object response, Object assertValue) {
+        Object expect = ((Assertinfo) assertValue).getAssert_value();
+        if (response.getClass() == JSONArray.class) {
+            json_SIZE(((JSONArray) response).size(), Integer.valueOf(expect.toString()));
+        } else if (response.getClass() == JSONObject.class) {
+            json_SIZE(((JSONObject) response).size(), Integer.valueOf(expect.toString()));
+        } else {
+            base_CONTAINS(response.toString(), expect);
+        }
         return true;
     }
 
-    public boolean action_ISEMPTY(Object response,Object assertValue){
-
+    public boolean action_ISEMPTY(Object response, Object assertValue) {
+        Object expect = ((Assertinfo) assertValue).getAssert_value();
+        if (response.getClass() == JSONArray.class) {
+            base_ISEMPTY(((JSONArray) response).toJSONString());
+        } else if (response.getClass() == JSONObject.class) {
+            base_ISEMPTY(((JSONObject) response).toJSONString());
+        } else {
+            base_ISEMPTY(response);
+        }
         return true;
     }
 
-    public boolean action_KEY_VALUE(Object response,Object assertValue){
-
-        return true;
+    public boolean action_KEY_VALUE(Object response, Object assertValue) {
+        Object expect = ((Assertinfo) assertValue).getAssert_value();
+        try {
+            String[] key_value = expect.toString().split(":");
+            if (response.getClass() == JSONObject.class) {
+                base_EQUAL(((JSONObject) response).get(key_value[0]).toString(), key_value[1].toString());
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(expect + " is not format of  $key:$value");
+            e.printStackTrace();
+        }
+        AssertC.fail("Json is not jsonObject,  " + response);
+        return false;
     }
 
-    public boolean action_CONTAINS_KEY(Object response,Object assertValue){
-
-        return true;
+    public boolean action_CONTAINS_KEY(Object response, Object assertValue) {
+        Object expect = ((Assertinfo) assertValue).getAssert_value();
+        if (response.getClass() == JSONObject.class) {
+            AssertC.assertTrue(((JSONObject) response).containsKey(expect), getMessage(response, expect, EumAction.AssertActions.CONTAINS_KEY.toString()));
+            return true;
+        }
+        AssertC.fail("Json is not jsonObject,  " + response);
+        return false;
     }
 
-    public boolean action_CONTAINS_VALUE(Object response,Object assertValue){
-
+    public boolean action_CONTAINS_VALUE(Object response, Object assertValue) {
+        Object expect = ((Assertinfo) assertValue).getAssert_value();
+        try {
+            expect= new Integer(expect.toString());
+        } catch (NumberFormatException e) {
+        }
+        if (response.getClass() == JSONArray.class) {
+            try {
+                expect= JSONValue.parse(expect.toString());
+            } catch (NumberFormatException e) {
+            }
+            AssertC.assertTrue(((JSONArray) response).contains(expect), getMessage(response, expect, "JSONArray list contains"));
+        } else if (response.getClass() == JSONObject.class) {
+            AssertC.assertTrue(((JSONObject) response).containsValue(expect), getMessage(response, expect, EumAction.AssertActions.CONTAINS_VALUE.toString()));
+        } else {
+            AssertC.assertTrue(response.toString().indexOf(expect.toString()) !=-1, getMessage(response, expect, "String indexOf"));
+        }
         return true;
     }
 }

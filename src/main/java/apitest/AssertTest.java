@@ -17,7 +17,10 @@ public class AssertTest {
 
 
     public static void main(String[] args) {
-        Map ss=new HashMap();
+        Integer a=0;
+        System.out.println(a.getClass().getSimpleName());
+
+     /*   Map ss=new HashMap();
 
 
         System.out.println(a.getJsonObject(sjson,"$.store.*").getClass());
@@ -28,7 +31,7 @@ public class AssertTest {
 
         for (EumAction.AssertActions e : EumAction.AssertActions.values()) {
             System.out.println(e.toString());
-        }
+        }*/
 
 
     }

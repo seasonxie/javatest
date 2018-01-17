@@ -1,5 +1,7 @@
 package apitest.assertimpl.assertbase;
 
+import apitest.AssertC;
+import apitest.model.Assertinfo;
 import apitest.model.EumAction;
 import org.testng.Assert;
 
@@ -9,26 +11,93 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 public class AssertBase {
-    public final static String ONLY_CHECK="only_check";
-    public final static String NOT_CHECK="not_check";
+    public final static String ONLY_CHECK = "only_check";
+    public final static String NOT_CHECK = "not_check";
+
+    public static String getMessage(Object expect,Object actual,String action){
+        return "[["+action+"]]  [actual] "+actual.toString()+"  [Expect] "+expect.toString();
+    }
+    public static boolean checkType(Object response,String type){
+        System.out.println("CheckType: "+response +" is "+type);
+        AssertC.assertEquals(response.getClass().getSimpleName().toUpperCase(),type.trim().toUpperCase());
+        return true;
+    }
 
 
-    public static boolean getAction(Class<?> c, String act, Object response, Object assertValue) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        Object obj = c.newInstance();
-        Method[] methods=c.getDeclaredMethods();
+    public static boolean base_EQUAL(Object response, Object assertValue) {
+        AssertC.assertEquals(response, assertValue, getMessage(response, assertValue,
+                EumAction.AssertActions.EQUAL.toString()));
+        return true;
+    }
+
+    public static boolean base_EQUAL(String response, String assertValue) {
+        AssertC.assertEquals(response.trim(), assertValue.trim(), getMessage(response, assertValue,
+                EumAction.AssertActions.EQUAL.toString()));
+        return true;
+    }
+
+    public static boolean base_CONTAINS(Object response, Object assertValue) {
+        AssertC.assertTrue(response.toString().trim().contains(assertValue.toString().trim()), getMessage(response, assertValue,
+                EumAction.AssertActions.CONTAINS.toString()));
+        return true;
+    }
+
+    public static boolean base_SIZE(Object response, Object assertValue) {
+        AssertC.assertEquals(response.toString().length(),assertValue, getMessage(response, assertValue,
+                EumAction.AssertActions.SIZE.toString()));
+        return true;
+    }
+
+    public static boolean base_ISEMPTY(Object response) {
+        AssertC.assertTrue(response.toString().isEmpty(), getMessage(response, "not empty",
+                EumAction.AssertActions.ISEMPTY.toString()));
+        return true;
+    }
+
+
+    public boolean base_CONTAINS_KEY(Object response, Object assertValue) {
+        AssertC.assertTrue(((Map)response).containsKey(assertValue), getMessage(response, assertValue,
+                EumAction.AssertActions.CONTAINS_KEY.toString()));
+        return true;
+    }
+
+    public static boolean base_CONTAINS_VALUE(Object response, Object assertValue) {
+        AssertC.assertTrue(((Map)response).containsValue(assertValue), getMessage(response, assertValue,
+                EumAction.AssertActions.CONTAINS_VALUE.toString()));
+        return true;
+    }
+
+
+    public static boolean getAction(Class<?> c, String act, Object response, Object assertValue) {
+        Object obj = null;
+        try {
+            obj = c.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Method[] methods = c.getDeclaredMethods();
         for (EumAction.AssertActions e : EumAction.AssertActions.values()) {
-            if(e.toString().equals(act.toString())){
-                for(Method m:methods){
-                    if(m.getName().contains(act.toString())){
-                        Method method=c.getMethod(m.getName(), Object.class,Object.class);
-                        boolean str2= (Boolean) method.invoke(obj, new Object[]{response,assertValue});
-                        System.out.println(str2);
+            if (e.toString().equals(act.toString())) {
+                for (Method m : methods) {
+                    if (m.getName().replace("action_","").trim().equals(act.toString().trim())) {
+                        boolean str2=false;
+                        try {
+                            Method method = c.getMethod(m.getName(), Object.class, Object.class);
+                            str2 = (Boolean) method.invoke(obj, new Object[]{response, assertValue});
+                            System.out.println(str2);
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                            if(assertValue.getClass()== Assertinfo.class){
+                                assertValue=((Assertinfo)assertValue).getAssert_value();
+                            }
+                            System.out.println(m.getName()+" -- "+response+" -- "+assertValue);
+                        }
                         return str2;
                     }
                 }
             }
         }
-        Assert.fail("No assertAction: "+act +" in "+c.getSimpleName());
+        Assert.fail("No assertAction: " + act + " in " + c.getSimpleName());
         return true;
     }
 
@@ -39,27 +108,27 @@ public class AssertBase {
             String key = (String) ((Map.Entry) map).getKey();
             Object actual_value = actual.get(key);
             Object expect_value = ((Map.Entry) map).getValue();
-            if(actual.containsKey(key))
+            if (actual.containsKey(key))
                 if (expect_value != null) {
                     if (!onlyCheck.isEmpty()) {
                         if (onlyCheck.contains(ONLY_CHECK))
-                            if (!onlyCheck.replace(ONLY_CHECK,"").contains(key)) {
-                                System.out.println(ONLY_CHECK+key );
+                            if (!onlyCheck.replace(ONLY_CHECK, "").contains(key)) {
+                                System.out.println(ONLY_CHECK + key);
                                 continue;
                             }
 
                         if (onlyCheck.contains(NOT_CHECK))
-                            if (onlyCheck.replace(NOT_CHECK,"").contains(key)) {
-                                System.out.println(NOT_CHECK+key );
+                            if (onlyCheck.replace(NOT_CHECK, "").contains(key)) {
+                                System.out.println(NOT_CHECK + key);
                                 continue;
                             }
                     }
                     checkTimes++;
-                    System.out.println("CheckKey "+key );
+                    System.out.println("CheckKey " + key);
                     result += asserts(key, expect_value, actual_value);
                 }
         }
-        System.out.println("checkTimes "+checkTimes );
+        System.out.println("checkTimes " + checkTimes);
         Assert.assertTrue(result.trim().isEmpty(), result);
         return true;
     }
@@ -67,7 +136,7 @@ public class AssertBase {
 
     public static String asserts(String key, Object ex, Object ac) {
         String result = "";
-        if (ac == null ) {
+        if (ac == null) {
             result += "【" + key + "】 false actual_value is null ";
             return result;
         }
@@ -84,12 +153,9 @@ public class AssertBase {
     }
 
 
-
-
-
     public static boolean isJson(Object expect, Object actual) {
         if ((expect.toString().startsWith("{") && expect.toString().endsWith("}"))
-                || (actual.toString().startsWith("{") && actual.toString().endsWith("}"))) {
+                && (actual.toString().startsWith("{") && actual.toString().endsWith("}"))) {
             return true;
         }
         return false;
@@ -163,7 +229,7 @@ public class AssertBase {
                 || expectedValue.getClass().isAssignableFrom(Byte.class)
                 || expectedValue.getClass().isAssignableFrom(Long.class)
                 || expectedValue.getClass().isAssignableFrom(Float.class)
-                || expectedValue.getClass().isAssignableFrom(Date.class) || isList(expectedValue)||expectedValue.getClass().isArray()) {
+                || expectedValue.getClass().isAssignableFrom(Date.class) || isList(expectedValue) || expectedValue.getClass().isArray()) {
             return true;
         } else {
             return false;
