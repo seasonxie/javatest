@@ -71,7 +71,7 @@ public class case1 {
         ThreadGroup threadGroup = new ThreadGroup();
         threadGroup.setName("TestGoogle");
         //SetupThreadGroup threadGroup = new SetupThreadGroup();
-        threadGroup.setNumThreads(2000);
+        threadGroup.setNumThreads(500);
         threadGroup.setRampUp(1);
         threadGroup.setSamplerController((LoopController) loopCtrl);
         // threadGroup.addTestElement(ra);
@@ -137,7 +137,7 @@ public class case1 {
         hashTree.add("threadGroup1", threadGroup1);
         hashTree.add("testPlan", testPlan);
         hashTree.add("loopCtrl", loopCtrl);
-        hashTree.add("httpSampler", httpSampler);
+         hashTree.add("httpSampler", httpSampler);
         // hashTree.add("JavaSampler", javaSample);
         //hashTree.add(hashTree.getArray()[0], requestCollector);
         hashTree.add(hashTree.getArray()[0], logger);

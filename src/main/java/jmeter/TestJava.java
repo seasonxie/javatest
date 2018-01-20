@@ -7,6 +7,7 @@ import org.apache.jmeter.samplers.SampleResult;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class TestJava  extends AbstractJavaSamplerClient {
@@ -16,6 +17,7 @@ public class TestJava  extends AbstractJavaSamplerClient {
     public Arguments getDefaultParameters() {
         System.out.println("===========init parameters ========");
         Arguments arg = new Arguments();
+
         return arg;
     }
     @Override
@@ -24,17 +26,20 @@ public class TestJava  extends AbstractJavaSamplerClient {
         sr.sampleStart();
        System.out.println("12311111111111111111111111111111111111111111111111111111111111111111");
 
-        ArrayList ss= new ArrayList();
-        //此处是调用逻辑
-        int a=100110;
-        for (int i = 0; i < a; i++) {
-            ss.add(i);
+        int a=new Random().nextInt(1000) +1;
+        if(a%4==0){
+            try {
+                Integer.valueOf(a+"ddd");
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+            sr.setSuccessful(false);
+        }else{
+            sr.setSuccessful(true);
         }
-        for (int i = 0; i < ss.size(); i++) {
-            ss.get(i);
-        }
-        ss.clear();
-        sr.setSuccessful(true);
+
+
+
         sr.sampleEnd();
         return sr;
     }

@@ -2,7 +2,7 @@ package ListMap;
 
 import org.assertj.core.util.Arrays;
 
-public class PP {
+public class MaoSort {
 
     public static void main(String[] args) {
         int[] app={1,33,44,5,6,55,99,54};
