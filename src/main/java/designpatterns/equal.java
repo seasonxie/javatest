@@ -3,10 +3,20 @@ package designpatterns;
 
 import org.testng.annotations.Test;
 
+import java.util.*;
+
 /**
  * Created by zhaotang on 2017/10/19.
  */
 public class equal {
+
+    public static void main(String[] args) {
+        ArrayList ss=new ArrayList();
+        LinkedList aa=new LinkedList();
+        HashMap dd=new HashMap<>();
+        Set sd=new HashSet();
+
+    }
 
     @Test
     public void test2() {
@@ -35,7 +45,9 @@ public class equal {
 
 
     class A {
-        // static{} > { }  >  构造器
+
+        // static{} > { }  >  构造器（先父类后子类）
+        //静态变量被所有的对象所共享，在内存中只有一个副本，它当且仅当在类初次加载时会被初始化，并且只会执行一次
 
         private String a = "a";  //方法区常量池 ，String池中开辟一块空间，存放String常量"abc"，
         //存对象，堆区被所有线程共享，存放对象本身
