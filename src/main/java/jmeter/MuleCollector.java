@@ -36,6 +36,16 @@ public class MuleCollector extends AbstractListenerElement implements SampleList
     private long finishTimeInMillis = 0;
     private Thread sorter;
     private HashMap<String, Double> slaResults;
+    private String currentThreadName;
+    public static Map<String, List<String>> allResultTime = new LinkedHashMap<>();
+
+    public String getCurrentThreadName() {
+        return currentThreadName;
+    }
+
+    public void setCurrentThreadName(String currentThreadName) {
+        this.currentThreadName = currentThreadName;
+    }
 
     MuleCollector(int expectedThreads, String logFile){
         this.expectedThreads = expectedThreads;
@@ -77,7 +87,7 @@ public class MuleCollector extends AbstractListenerElement implements SampleList
             if(!result.isSuccessful()) {
                 failedReq.incrementAndGet();
             }
-
+        setCurrentThreadName(sampleEvent.getThreadGroup());
 
 /*        }else {
             String threadName = sampleEvent.getResult().getThreadName();
