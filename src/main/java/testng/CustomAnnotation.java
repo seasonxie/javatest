@@ -6,6 +6,9 @@ import org.testng.annotations.ITestAnnotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
+/**
+ * @author zhaotang
+ */
 public class CustomAnnotation implements IAnnotationTransformer {
 
 
@@ -14,7 +17,7 @@ public class CustomAnnotation implements IAnnotationTransformer {
     public void transform(ITestAnnotation annotation, Class testClass,
                           Constructor testConstructor, Method testMethod) {
         System.out.println(" MyTransformer  "+testMethod);
-        if ("test1".equals(testMethod.getName())) {
+        if ("test11".equals(testMethod.getName())) {
             annotation.setInvocationCount(5);
         }
 

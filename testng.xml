@@ -2,12 +2,12 @@
 
 <suite name="CPDTestSuite" parallel="false" verbose="1"> <!-- classes, methods, tests -->
 	<listeners>
-	<listener class-name="testng.retry.RetryListener" />
-	<listener class-name="testng.MyListener" />
+	<listener class-name="testng.CustomAnnotation" />
+<!--	<listener class-name="testng.MyListener" />-->
 	</listeners>
 	<test name="FlymeSdkAppCpcAdTest" verbose="2" preserve-order="true" junit="false">
 		<classes>
-			<class name="testng.retry.Tests" >
+			<class name="testng.retry.Test1" >
 			<!--	<methods>
 					<include name="test" />
 				</methods>-->
