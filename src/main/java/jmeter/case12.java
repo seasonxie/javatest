@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 import java.util.Locale;
 
-public class case3 {
+public class case12 {
 
     @Test
     public void test() throws InterruptedException {

@@ -26,7 +26,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Locale;
 
-public class case1 {
+public class case11 {
 
     @Test
     public void testPost() {
