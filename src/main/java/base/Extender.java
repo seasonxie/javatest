@@ -1,4 +1,4 @@
-package designpatterns;
+package base;
 
 /**
  * Created by liwenjing on 2017/11/2.
@@ -11,7 +11,6 @@ public class Extender {
         aa.a1sqy();      //1.重写后将会引用子类的
         // aa.aa1say();   //2.非重叠的子类方法遗失
 
-
         //父类对象转为子类父类对象转为子类对象   向下转型
         child bb = (child) aa;
         bb.a1sqy();
@@ -19,7 +18,7 @@ public class Extender {
 
         //直接向下装报错
         parent aaa = new parent();
-        //child bbb = (child) aaa;  //designpatterns.parent cannot be cast to designpatterns.child
+        //child bbb = (child) aaa;  //base.parent cannot be cast to base.child
     }
 }
 
@@ -32,6 +31,8 @@ class parent {
 class child extends parent {
     public void aa1say() {
         System.out.println("im aa1");
+        String ss="";
+        ss.hashCode();
     }
 
     @Override

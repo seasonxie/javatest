@@ -1,6 +1,4 @@
-package ListMap;
-
-import org.assertj.core.util.Arrays;
+package algorithm;
 
 public class MaoSort {
 

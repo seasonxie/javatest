@@ -1,4 +1,4 @@
-package ListMap;
+package algorithm;
 
 public class QuickSort {
     //http://blog.csdn.net/it_zjyang/article/details/53406764

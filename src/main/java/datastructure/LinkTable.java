@@ -1,4 +1,4 @@
-package ListMap;
+package datastructure;
 
 public class LinkTable {
 

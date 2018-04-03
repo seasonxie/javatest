@@ -1,4 +1,4 @@
-package designpatterns;
+package useful;
 
 import org.assertj.db.type.Change;
 import org.assertj.db.type.Changes;
@@ -9,7 +9,17 @@ import org.testng.annotations.Test;
 import java.sql.*;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class AssertJDB {
+
+    public static void main(String[] args) {
+        assertThat("abc").as("校验abc")
+                .startsWith("ab")
+                .endsWith("c").contains("","").doesNotContain("");
+//                .isEqualToIgnoringCase("frodo")
+//                .hasSize(9);
+    }
     @Test
     public void test11() throws InterruptedException, SQLException, ClassNotFoundException {
         Source source = new Source("jdbc:mysql://172.17.49.51:3306/Task?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull","root","root");

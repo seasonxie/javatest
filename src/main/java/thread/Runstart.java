@@ -1,6 +1,6 @@
-package spring;
+package thread;
 
-public class spring {
+public class Runstart {
     public
     static  void  main(String args[]) {
 

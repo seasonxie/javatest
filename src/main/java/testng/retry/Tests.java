@@ -10,6 +10,7 @@ import org.testng.annotations.*;
 @DataPrepare(DataFile="ss.xls",SheetForTable={"inter_sheet","F_INTER"},classType = DataPrepare.Clazzs.Class)
 public class Tests {
 
+
     private  ITestContext myContext;
 
 /*    @Test*//*(invocationCount = 2)*//*

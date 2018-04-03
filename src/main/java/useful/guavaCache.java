@@ -1,4 +1,4 @@
-package designpatterns;
+package useful;
 
 import com.google.common.cache.*;
 

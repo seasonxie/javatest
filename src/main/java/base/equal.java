@@ -1,4 +1,4 @@
-package designpatterns;
+package base;
 
 
 import org.testng.annotations.Test;
@@ -117,13 +117,6 @@ public class equal {
    /* public E remove(int index);
     public boolean remove(Object o);
     当我们传入int类型的时候，会自动被当成上面那个方法来调用。而下面那个移除某个特定元素的方法是需要传入一个Object对象*/
-    }
-
-    public void Reference() {
-        //StrongReference  宁愿outofmemery也不回收
-        //SoftReference 内存不足回收
-        //WeakReference 扫描到就回收
-        //PhantomReference 任何时候都可能被
     }
 
 
