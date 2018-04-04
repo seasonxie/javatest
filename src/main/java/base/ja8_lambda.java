@@ -1,3 +1,4 @@
+/*
 package base;
 
 import org.testng.annotations.Test;
@@ -10,13 +11,15 @@ import java.util.stream.Collectors;
 
 public class ja8_lambda {
 
-    /**
+    */
+/**
      * Lambda 表达式
      * 方法引用
      * Stream,filter
      * 默认方法
      * Optional 类是一个可以为null的容器对象
-     */
+     *//*
+
 
     @Test
     public void thread(){
@@ -117,3 +120,4 @@ class Car{
     }
 }
 
+*/

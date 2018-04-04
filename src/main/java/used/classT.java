@@ -18,5 +18,14 @@ public class classT {
             ？super E:接收E类型或者E的父类型。
             */
 
+    public void test(){
+        BaseDao<type> ba=new BaseDaoImpl<>();  //上转
+        type t=ba.getObjectFromPrams("");
+       // ba.getWhereInfo(); 上转无这个
+
+        //下转
+        BaseDaoImpl bas= (BaseDaoImpl) ba;
+        bas.getWhereInfo();
+    }
 
 }
