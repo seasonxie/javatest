@@ -19,7 +19,10 @@ public class classT {
             */
 
     public void test(){
-        BaseDao<type> ba=new BaseDaoImpl<>();  //上转
+        BaseDaoImpl<type,type> baa=new BaseDaoImpl<type,type>();  //normal
+
+
+        BaseDao<type,type> ba=new BaseDaoImpl<>();  //上转
         type t=ba.getObjectFromPrams("");
        // ba.getWhereInfo(); 上转无这个
 

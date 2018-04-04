@@ -7,14 +7,16 @@ import java.util.Map;
 /**
  * Created by zhaotang on 2017/8/28.
  */
-public class BaseDaoImpl<T> implements BaseDao<T>{
+public class BaseDaoImpl<T,R extends type> implements BaseDao<T,R>{
     public static final String tag="BaseDaoImpl";
 
 
 
     @Override
-    public T getObjectFromPrams(String tableName) {
+    public  <T,R extends type>  T getObjectFromPrams(String tableName) {
         String baseSql="select * from "+tableName;
+        R ss=null;
+        ss.equals(null);
         T CO=null;
         return CO;
     }
