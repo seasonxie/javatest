@@ -1,9 +1,6 @@
 package useful;
 
-import org.assertj.db.type.Change;
-import org.assertj.db.type.Changes;
-import org.assertj.db.type.Source;
-import org.assertj.db.type.Value;
+import org.assertj.db.type.*;
 import org.testng.annotations.Test;
 
 import java.sql.*;
@@ -20,27 +17,64 @@ public class AssertJDB {
 //                .isEqualToIgnoringCase("frodo")
 //                .hasSize(9);
     }
+
     @Test
     public void test11() throws InterruptedException, SQLException, ClassNotFoundException {
-        Source source = new Source("jdbc:mysql://172.17.49.51:3306/Task?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull","root","root");
+        //Source source = new Source("jdbc:mysql://172.17.49.51:3306/Task?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull","root","root");
+        Source source = new Source("jdbc:mysql://172.17.48.20:3306/meizu_adx?characterEncoding=utf-8&cacheServerConfiguration=true&useLocalSessionState=true&zeroDateTimeBehavior=convertToNull","mysqluser","mysqluser");
         Changes changes = new Changes(source);
         changes.setStartPointNow();
-        Thread.sleep(2000);
-        ttt();
-        Thread.sleep(2000);
+        System.out.println("--------start");
+        Thread.sleep(20000);
         changes.setEndPointNow();
         List<Change> changeList = changes.getChangesList();
         System.out.println(changeList.size()+"  ----------");
-        for(Change s:changeList){
-            String sql = "--- ";
-            List<Value> valuesList = s.getRowAtEndPoint().getValuesList();
-            for(Value value : valuesList){
-                Object columenValue = value.getValue();
-                sql = sql + "'" +columenValue+"',";
+        printSql(changeList);
+
+
+   /*     changes.setStartPointNow();
+        System.out.println("--------start");
+        Thread.sleep(20000);
+        changes.setEndPointNow();
+        changeList = changes.getChangesList();
+        System.out.println(changeList.size()+"  ----------");
+        printSql(changeList);*/
+    }
+
+    public static void printSql(List<Change> changeList){
+        for(Change change:changeList){
+            ChangeType type = change.getChangeType();
+            String tableName = change.getDataName();
+            if("CREATION".equals(type.name())){
+                String id = change.getRowAtEndPoint().getValuesList().get(0).getColumnName();
+                Object value = change.getRowAtEndPoint().getValuesList().get(0).getValue();
+                String sql = "delete from "+tableName+" where "+id+" = "+value+"";
+                System.out.println(sql);
+            }else if("DELETION".equals(type.name())){
+                String sql = "insert into "+tableName+" values(";
+                List<Value> valuesList = change.getRowAtStartPoint().getValuesList();
+                for(Value value : valuesList){
+                    Object columenValue = value.getValue();
+                    sql = sql + "'" +columenValue+"',";
+                }
+                sql = sql.substring(0, sql.length()-1);
+                sql = sql +")";
+                System.out.println(sql);
+            }else if("MODIFICATION".equals(type.name())){
+                String sql = "update "+tableName+" SET ";
+                List<Value> valuesList = change.getRowAtStartPoint().getValuesList();
+                for(Value value : valuesList){
+                    Object columenValue = value.getValue();
+                    String columnName = value.getColumnName();
+                    sql = sql + columnName +"='"+columenValue+"' ,";
+                }
+                sql = sql.substring(0, sql.length()-1);
+                sql = sql + " where "+valuesList.get(0).getColumnName()+" = "+valuesList.get(0).getValue();
+                System.out.println(sql);
             }
-            System.out.println(s.getChangeType()  +"  start:");
-            System.out.println(sql);
+
         }
+
     }
 
 
