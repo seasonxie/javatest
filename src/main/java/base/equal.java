@@ -10,13 +10,6 @@ import java.util.*;
  */
 public class equal {
 
-    public static void main(String[] args) {
-        ArrayList ss=new ArrayList();
-        LinkedList aa=new LinkedList();
-        HashMap dd=new HashMap<>();
-        Set sd=new HashSet();
-
-    }
 
     @Test
     public void test2() {
@@ -119,5 +112,38 @@ public class equal {
     当我们传入int类型的时候，会自动被当成上面那个方法来调用。而下面那个移除某个特定元素的方法是需要传入一个Object对象*/
     }
 
+    @Test
+    public  void main22() {
+        System.out.println("----");
+        setdata s1=new setdata();
+        s1.setName("333");
+        testdatadd(s1);  //方法里面不会变，传入的是对象引用地址
+        System.out.println(s1.getName());  //333
 
+        setdata s2=new setdata();
+        s2=s1;
+        s2.setName("3333344");
+        System.out.println(s1.getName()); //333333444
+    }
+
+    public void testdatadd(setdata s){
+        setdata s1=new setdata();
+        s1.setName("111");
+        s=s1;
+        s.setName("222");
+        System.out.println(s==s1);
+        System.out.println(s.getName());
+    }
+
+class setdata{
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    String name;
+}
 }

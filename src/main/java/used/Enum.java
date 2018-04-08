@@ -53,9 +53,7 @@ public class Enum {
     }
 
     public static void main(String[] args) {
-        System.out.println(base.BASE.getDbConnect());
-        ;
-        System.out.println(SomeThing.INSTANCE);
+       // System.out.println(base.BASE.getDbConnect());
         System.out.println(SomeThing.INSTANCE);
         System.out.println(DbeResource.BASE.getIndex());
     }
