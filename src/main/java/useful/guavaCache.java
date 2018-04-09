@@ -1,15 +1,29 @@
 package useful;
 
 import com.google.common.cache.*;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
 
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class guavaCache {
     public static void main(String[] args) throws ExecutionException {
-        for (int i = 0; i <10 ; i++) {
+        //cache
+        for (int i = 0; i < 10; i++) {
+            System.out.println(adAppIdCache.get("1") + "  )))");
+        }
 
-            System.out.println(adAppIdCache.get("1")+"  )))");
+        //table
+        Table<String, String, String> employeeTable = HashBasedTable.create();
+        employeeTable.put("IBM", "101", "Mahesh");
+        employeeTable.put("IBM", "102", "Ramesh");
+        employeeTable.put("IBM", "103", "Suresh");
+        System.out.println("List of IBM Employees");
+        Map<String, String> ibmEmployees = employeeTable.row("IBM");
+        for (Map.Entry<String, String> entry : ibmEmployees.entrySet()) {
+            System.out.println("Emp Id: " + entry.getKey() + ", Name: " + entry.getValue());
         }
     }
 
@@ -19,7 +33,7 @@ public class guavaCache {
         public Integer load(String key) throws Exception {
             try {
                 int v = getAdAppIdByPkgName(key);
-                System.out.println(v +"  -");
+                System.out.println(v + "  -");
                 return v;
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -28,10 +42,10 @@ public class guavaCache {
         }
     }, 10000, 5, TimeUnit.MINUTES);
 
-    public static Integer getAdAppIdByPkgName(String key){
-        java.util.Random r=new java.util.Random(10);
+    public static Integer getAdAppIdByPkgName(String key) {
+        java.util.Random r = new java.util.Random(10);
         System.out.println("---");
-        return  r.nextInt();
+        return r.nextInt();
     }
 
     private static <K, V> LoadingCache<K, V> callableCached(CacheLoader<? super K, V> loader,
