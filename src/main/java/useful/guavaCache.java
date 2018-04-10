@@ -1,14 +1,17 @@
 package useful;
 
 import com.google.common.cache.*;
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
+import com.google.common.collect.*;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class guavaCache {
+
+
     public static void main(String[] args) throws ExecutionException {
         //cache
         for (int i = 0; i < 10; i++) {
@@ -25,6 +28,60 @@ public class guavaCache {
         for (Map.Entry<String, String> entry : ibmEmployees.entrySet()) {
             System.out.println("Emp Id: " + entry.getKey() + ", Name: " + entry.getValue());
         }
+
+
+        //反转
+        BiMap<Integer, String> empIDNameMap = HashBiMap.create();
+
+        empIDNameMap.put(new Integer(101), "Mahesh");
+        empIDNameMap.put(new Integer(102), "Sohan");
+        empIDNameMap.put(new Integer(103), "Ramesh");
+
+        //Emp Id of Employee "Mahesh"
+        System.out.println(empIDNameMap.inverse().get("Mahesh"));
+
+        //
+        Multiset<String> multiset = HashMultiset.create();
+        multiset.add("a");
+        multiset.add("b");
+        multiset.add("c");
+        multiset.add("d");
+        multiset.add("a");
+        multiset.add("b");
+        multiset.add("c");
+        multiset.add("b");
+        multiset.add("b");
+        multiset.add("b");
+        //print the occurrence of an element
+        System.out.println("Occurrence of 'b' : "+multiset.count("b"));
+        //print the total size of the multiset
+        System.out.println("Total Size : "+multiset.size());
+        //get the distinct elements of the multiset as set
+        Set<String> set = multiset.elementSet();
+        System.out.println(set.size());
+
+    }
+
+    private Multimap<String,String> getMultimap(){
+        //Map<String, List<String>>
+        // lower -> a, b, c, d, e
+        // upper -> A, B, C, D
+
+        Multimap<String,String> multimap = ArrayListMultimap.create();
+
+        multimap.put("lower", "a");
+        multimap.put("lower", "b");
+        multimap.put("lower", "c");
+        multimap.put("lower", "d");
+        multimap.put("lower", "e");
+
+        multimap.put("upper", "A");
+        multimap.put("upper", "B");
+        multimap.put("upper", "C");
+        multimap.put("upper", "D");
+
+        List<String> lowerList = (List<String>)multimap.get("lower");
+        return multimap;
     }
 
 
